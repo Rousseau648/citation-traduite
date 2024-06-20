@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citation Traduit</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Citation Aléatoire</h1>
+    <p id="quote">Chargement...</p>
+    <script>
+        async function fetchQuote() {
+            try {
+                const response = await axios.get('https://api.quotable.io/random');
+                const quote = response.data.content;
+                
+                const translatedQuote = await translateToFrench(quote);
+                document.getElementById('quote').innerText = translatedQuote;
+            } catch (error) {
+                console.error('Erreur lors de la récupération de la citation:', error);
+            }
+        }
+
+        async function translateToFrench(text) {
+            const response = await axios.get('https://api.mymemory.translated.net/get', {
+                params: {
+                    q: text,
+                    langpair: 'en|fr'
+                }
+            });
+            return response.data.responseData.translatedText;
+        }
+
+        fetchQuote();
+    </script>
+</body>
+</html>
