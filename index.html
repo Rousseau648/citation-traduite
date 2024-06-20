@@ -7,15 +7,17 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+    <h1>Citation Aléatoire</h1>
     <p id="quote"></p>
     <script>
         async function fetchQuote() {
             try {
-@@ -16,7 +18,7 @@
+                const response = await axios.get('https://api.quotable.io/random');
+                const quote = response.data.content;
+                
                 const translatedQuote = await translateToFrench(quote);
                 document.getElementById('quote').innerText = translatedQuote;
             } catch (error) {
-                console.error('J'ai pas trouvé de bonne citation', error);
                 console.error('Erreur lors de la récupération de la citation:', error);
             }
         }
@@ -29,6 +31,7 @@
             });
             return response.data.responseData.translatedText;
         }
+
         fetchQuote();
     </script>
 </body>
