@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <p id="quote"></p>
+    <p id="quote">Chargement...</p>
     <script>
         async function fetchQuote() {
             try {
@@ -16,8 +16,10 @@
                 
                 const translatedQuote = await translateToFrench(quote);
                 document.getElementById('quote').innerText = translatedQuote;
+                document.getElementById('quote').setAttribute('data-loaded', 'true'); // Indicateur de chargement
             } catch (error) {
                 console.error('Erreur lors de la récupération de la citation:', error);
+                document.getElementById('quote').innerText = 'Erreur de chargement.';
             }
         }
 
