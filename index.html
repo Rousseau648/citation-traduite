@@ -16,7 +16,7 @@
                 const translatedQuote = await translateToFrench(quote);
                 document.getElementById('quote').innerText = translatedQuote;
             } catch (error) {
-                console.error('Erreur lors de la récupération de la citation:', error);
+                console.error('J'ai pas trouvé de bonne citation', error);
             }
         }
 
